@@ -1,0 +1,60 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: null
+  tomcat:
+    max-wait: 20000
+    max-active: 50
+    max-idle: 20
+    min-idle: 15
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+        id:
+          new_generator_mappings: false
+  main:
+    allow-bean-definition-overriding: true
+
+server:
+  port: 8080 # This is the default port anyway, but you can change it here
+
+security:
+  jwt:
+    token:
+      secret-key: TAGpZEgRWCjzTuY3WrFcvNESYLRbTuEk-example
+      expire-length: 7200
+
+logging:
+  level:
+    root: DEBUG
+    com.ka: DEBUG
+
+#amazon:
+#  end-point:
+#    url: ${DYNAMO_URL}
+#  region: ap-southeast-1
+#  access:
+#    key: ${DYNAMO_ACCESS_KEY}
+#    secret-key: ${DYNAMO_ACCESS_SECRET}
+
+amazon:
+  end-point:
+    url: http://localhost:8000
+  region: eu-central-1
+  access:
+    key:
+    secret-key:
+
+UserController:
+  signin: Authenticates user and returns its JWT token.
+  signup: Creates user and returns its JWT token
+  delete: Deletes specific user by username
+  search: Returns specific user by username
+  me: Returns current user's data
